@@ -6,12 +6,14 @@ h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = int(cap.get(cv2.CAP_PROP_FPS))
 
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('output.mp4', fourcc, fps, (w, h))
+out = cv2.VideoWriter('output.mp4', fourcc, fps, (w, h), isColor=False)
 while True:
   ret, frame = cap.read()
   if not ret:
     print("Fialed to grab frame")
     break
+  frame = cv2.flip(frame, 1)
+  frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
   out.write(frame)
   cv2.imshow("Recording...", frame)
   
