@@ -88,7 +88,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 '''
-Unit 5 Summary
+Unit 5 Summary 
 Main functionns:
  - cv2.warpAffine() - for translation, rotation, affine transformation
  - cv2.warpPerspective() - for perspective transformation
