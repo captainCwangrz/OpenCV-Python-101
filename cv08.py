@@ -84,13 +84,13 @@ Main Concepts:
   - Contour features and moments
   - Shape approximation
 Important functions:
-  - cv2.findContours() works with binary images
-  - cv2.drawContours() draws contours on an image
-  - cv2.boundingRect() computes the bounding box for a contour
-  - cv2.minAreaRect() finds the minimum area rectangle for a contour
-  - cv2.minEnclosingCircle() finds the minimum enclosing circle for a contour
-  - cv2.moments() computes the moments of a contour
-  - cv2.approxPolyDP() approximates a contour shape
+  - cv2.findContours() - works with binary images
+  - cv2.drawContours() - draws contours on an image
+  - cv2.boundingRect() - computes the bounding box for a contour
+  - cv2.minAreaRect() - finds the minimum area rectangle for a contour
+  - cv2.minEnclosingCircle() - finds the minimum enclosing circle for a contour
+  - cv2.moments() - computes the moments of a contour
+  - cv2.approxPolyDP() - approximates a contour shape
 Typical pipeline:
   1. Preprocessing (e.g., grayscale, thresholding)
   2. Contour detection
