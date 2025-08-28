@@ -50,8 +50,25 @@ cv2.imshow('Adaptive Gaussian Thresholding', th3)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-# Morphological operations
-kernel = np.ones((5,5), np.uint8)
+'''
+Morphological Operations
+Kernel - a small shape like a square, circle, or cross. You slide this kernel over the image like a stencil.
+The image is binary or grayscale
+At each pixel, the kernel defines a neighborhood of pixels to consider
+
+Erosion:
+  A pixel survives only if all of its neighbors under the kernel are also white
+  - Thin lines become thinner
+  - Small white dots vanish
+  - Large blobs shrink inward (eroded)
+Dilate:
+  Vice versa
+Opening:
+  erosion -> dilation
+Closing:
+  dilation -> erosion
+'''
+kernel = np.ones((5,5), np.uint8) # k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3)) to get various non rectangular shapes
 # Erosion: shrink white regions
 eroded = cv2.erode(th1, kernel, iterations=1)
 # Dilation: expand white regions
