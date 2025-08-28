@@ -45,8 +45,8 @@ cap.read() to read frames in a loop
 cap.release() to release the camera
 
 For serious applications:
- - Must know your camerara's supported resolutions, fps, exposure, etc.
+ - Must know your camera's supported resolutions, fps, exposure, etc.
  - Settings matter a lot
  - Use v4l2-ctl on Linux to get/set camera settings?
- - Consider threading for performance (depens on application real time vs motion analysis)
+ - Consider threading for performance (depends on application real time vs motion analysis)
 '''
