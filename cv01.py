@@ -12,7 +12,7 @@ img_height = img.shape[0]
 img_width = img.shape[1]
 img_channel = img.shape[2]
 print(f'height: {img_height}, width: {img_width}, channel: {img_channel}')
-print(f"First pixel value at img[0,0] (B,R,G): {img[0,0]}") # BGR values of the first pixel
+print(f"First pixel value at img[0,0] (B,G,R): {img[0,0]}") # BGR values of the first pixel
 
 #Displaying an image
 cv2.imshow('Test Image', img)
