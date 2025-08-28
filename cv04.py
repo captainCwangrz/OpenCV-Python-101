@@ -6,7 +6,7 @@ h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = int(cap.get(cv2.CAP_PROP_FPS))
 
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('output.mp4', fourcc, fps, (w, h), isColor=False)
+out = cv2.VideoWriter('private_output.mp4', fourcc, fps, (w, h), isColor=False)
 while True:
   ret, frame = cap.read()
   if not ret:
