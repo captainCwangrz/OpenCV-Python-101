@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 
 # --- Preprocess ---
-img = cv2.imread('shapes.jpg') # 
+img = cv2.imread('shapes.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # First, threshold to get a binary image
@@ -30,9 +30,9 @@ cv2.destroyAllWindows()
 contours, _ = cv2.findContours(opening, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 print(f'Number of contours found: {len(contours)}')
 
-# Draw all contours (idx=-1 means all)
+# Draw all contours (idx=-1 means all); thickness=3
 contour_img = img.copy()
-cv2.drawContours(contour_img, contours, -1, (0, 255, 0), 3) # img, contours, contourIdx (-1 means all), color, thickness
+cv2.drawContours(contour_img, contours, -1, (0, 255, 0), 3)
 cv2.imshow('Contours', contour_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -87,12 +87,12 @@ cv2.destroyAllWindows()
 '''
 Unit 7 Summary
 Main functions:
- - `cv2.findContours(bin, mode, method)` — detect contours
- - `cv2.drawContours(img, contours, idx, color, thickness)` — draw
- - `cv2.boundingRect(c)` / `cv2.minAreaRect(c)` — bounding boxes
- - `cv2.minEnclosingCircle(c)` — enclosing circle
- - `cv2.moments(c)` — area/centroid/orientation
- - `cv2.approxPolyDP(c, eps, closed)` — polygonal approx
+ - `cv2.findContours(bin, mode, method)` - detect contours
+ - `cv2.drawContours(img, contours, idx, color, thickness)` - draw
+ - `cv2.boundingRect(c)` / `cv2.minAreaRect(c)` - bounding boxes
+ - `cv2.minEnclosingCircle(c)` - enclosing circle
+ - `cv2.moments(c)` - area/centroid/orientation
+ - `cv2.approxPolyDP(c, eps, closed)` - polygonal approx
 
 Key ideas:
  - Contours operate on binary images; preprocessing matters.
@@ -102,5 +102,5 @@ Key ideas:
 Tips:
  - Clean masks first (open/close) for better contours.
  - Guard against empty `contours` before `max()`.
- - Normalize epsilon by perimeter (e.g., 1–5%).
+ - Normalize epsilon by perimeter (e.g., 1-5%).
 '''
