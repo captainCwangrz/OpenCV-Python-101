@@ -72,7 +72,7 @@ epsilon = 0.02 * perimeter # 0.001 is considered tight approx, 0.1 is considered
 approx = cv2.approxPolyDP(c, epsilon, True)
 print(approx)
 cv2.drawContours(img, [approx], -1, (0,255,0), 3)
-cv2.imshow("Aprrox contour", img)
+cv2.imshow("Approx contour", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
