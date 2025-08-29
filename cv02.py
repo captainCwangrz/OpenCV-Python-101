@@ -76,7 +76,8 @@ cv2.circle(roi_repeated, (30, 30), 30, 255, 1)
 roi = roi_repeated[0:60, 0:60]
 for x in range(0, roi_repeated.shape[1], 60):
   for y in range(0, roi_repeated.shape[0], 60):
-    if (x//60 + y//60) % 2 == 0: # checkerboard pattern
+    # Checkerboard pattern
+    if (x//60 + y//60) % 2 == 0:
       roi_repeated[y:y+60, x:x+60] = roi
 cv2.imshow("roi_repeated", roi_repeated)
 cv2.waitKey(0)
@@ -86,13 +87,13 @@ print()
 '''
 Unit 2 Summary
 Main functions:
- - `cv2.line(img, pt1, pt2, color, thickness)` — draw line
- - `cv2.rectangle(img, pt1, pt2, color, thickness)` — draw rectangle
- - `cv2.circle(img, center, radius, color, thickness)` — draw circle
- - `cv2.putText(img, text, org, font, scale, color, thickness)` — text
- - `cv2.resize(img, (w, h), interpolation)` — resize
- - `cv2.flip(img, code)` — flip (0=vertical, 1=horizontal, −1=both)
- - `cv2.rotate(img, code)` — rotate (e.g., ROTATE_90_CLOCKWISE)
+ - `cv2.line(img, pt1, pt2, color, thickness)` - draw line
+ - `cv2.rectangle(img, pt1, pt2, color, thickness)` - draw rectangle
+ - `cv2.circle(img, center, radius, color, thickness)` - draw circle
+ - `cv2.putText(img, text, org, font, scale, color, thickness)` - text
+ - `cv2.resize(img, (w, h), interpolation)` - resize
+ - `cv2.flip(img, code)` - flip (0=vertical, 1=horizontal, -1=both)
+ - `cv2.rotate(img, code)` - rotate (e.g., ROTATE_90_CLOCKWISE)
 
 Key ideas:
  - Coordinate order is (x, y) for drawing points; array indexing is [y, x].
