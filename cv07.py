@@ -42,6 +42,8 @@ cv2.destroyAllWindows()
 
 # Apply color tracking to video
 cap = cv2.VideoCapture(0)
+cv2.namedWindow('Frame')
+cv2.setMouseCallback('Frame', show_hsv) # Register mouse event handler once
 while True:
   ret, frame = cap.read()
   if not ret:
@@ -65,7 +67,6 @@ while True:
   cv2.imshow('Frame', frame)
   cv2.imshow('Mask', mask)
   cv2.imshow('Result', result)
-  cv2.setMouseCallback('Frame', show_hsv)
   if cv2.waitKey(1) & 0xFF == ord('q'):
     break
 cap.release()
