@@ -11,7 +11,7 @@ from pathlib import Path
 print(cv2.__version__ )
 #print(cv2.getBuildInformation())
 
-#Reading an image and its dimensions
+# --- Reading and dimensions ---
 img = cv2.imread('test_img.png')
 print(f"imread() gives you: {type(img)}")
 print(f"img.shape: {img.shape}") # (height, width, color_channel)
@@ -45,19 +45,19 @@ cv2.imwrite('gray_img.png', gray_img)
 '''
 Unit 1 Summary
 Main functions:
- - `cv2.imread(path)` — load BGR image as NumPy array
- - `cv2.cvtColor(img, code)` — convert color spaces (e.g., BGR→GRAY)
- - `cv2.imshow(name, img)` / `cv2.waitKey()` — display and pause
- - `cv2.imwrite(path, img)` — save image to disk
+ - `cv2.imread(path)` - load BGR image as NumPy array
+ - `cv2.cvtColor(img, code)` - convert color spaces (e.g., BGR->GRAY)
+ - `cv2.imshow(name, img)` / `cv2.waitKey()` - display and pause
+ - `cv2.imwrite(path, img)` - save image to disk
 
 Key ideas:
  - Image shape is (height, width, channels); OpenCV uses BGR order.
- - A pixel is a 3‑tuple (B, G, R); grayscale is a single channel.
+ - A pixel is a 3-tuple (B, G, R); grayscale is a single channel.
  - `img[y, x]` indexes row (y) then column (x).
 
 Tips:
  - Check `img is not None` after `imread` to avoid NoneType errors.
  - Use small images for quick experiments; large ones slow down UI.
- - Prefer absolute or script‑relative paths to avoid CWD surprises.
+ - Prefer absolute or script-relative paths to avoid CWD surprises.
 '''
 
