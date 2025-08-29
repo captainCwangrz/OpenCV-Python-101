@@ -1,10 +1,18 @@
+"""
+Unit 7: Contours & Shapes
+- Overview: Preprocess to binary, find contours, draw them, compute bounding shapes, features, and polygonal approximation.
+- Inputs: `shapes.jpg` in the same folder.
+- Usage: Press any key in image windows to proceed/close.
+"""
+
 import cv2
 import numpy as np
 
+# --- Preprocess ---
 img = cv2.imread('shapes.jpg') # 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# First we do a threshold to get a binary image
+# First, threshold to get a binary image
 _, thresh = cv2.threshold(gray, 90, 255, cv2.THRESH_BINARY)
 
 # Apply opening to remove white dots
@@ -18,18 +26,18 @@ cv2.imshow('Opened', opening)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-# Find contours
+# --- Find contours ---
 contours, _ = cv2.findContours(opening, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 print(f'Number of contours found: {len(contours)}')
 
-# Draw all contours
+# Draw all contours (idx=-1 means all)
 contour_img = img.copy()
 cv2.drawContours(contour_img, contours, -1, (0, 255, 0), 3) # img, contours, contourIdx (-1 means all), color, thickness
 cv2.imshow('Contours', contour_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-# Bounding shapes
+# --- Bounding shapes ---
 bound_shapes = img.copy()
 c = max(contours, key=cv2.contourArea) # Runs max() based on contourArea. c is largest contour
 
@@ -51,9 +59,9 @@ cv2.imshow("Largest shape bounded", bound_shapes)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-# Contour features
-# moments are weighted sums of pixel coords - encodes properties like area, centroid, and orientation
-# M is a dictionary with keys like "m00, m01, m10, etc.."
+# --- Contour features ---
+# Moments encode properties like area, centroid, and orientation
+# M is a dict with keys like m00, m01, m10, etc.
 M = cv2.moments(c) 
 
 cx = int(M["m10"] / M["m00"]) # m10 first order moments that weight the contour's pixels by x
@@ -67,7 +75,7 @@ area = cv2.contourArea(c)
 perimeter = cv2.arcLength(c, True)
 print("Area:", area, "Perimeter:", perimeter)
 
-# Shape approximation
+# --- Shape approximation ---
 epsilon = 0.02 * perimeter # 0.001 is considered tight approx, 0.1 is considered loose.
 approx = cv2.approxPolyDP(c, epsilon, True)
 print(approx)
@@ -78,22 +86,21 @@ cv2.destroyAllWindows()
 
 '''
 Unit 7 Summary
-Main Concepts:
-  - Contour detection and analysis
-  - Shape bounding techniques
-  - Contour features and moments
-  - Shape approximation
-Important functions:
-  - cv2.findContours() - works with binary images
-  - cv2.drawContours() - draws contours on an image
-  - cv2.boundingRect() - computes the bounding box for a contour
-  - cv2.minAreaRect() - finds the minimum area rectangle for a contour
-  - cv2.minEnclosingCircle() - finds the minimum enclosing circle for a contour
-  - cv2.moments() - computes the moments of a contour
-  - cv2.approxPolyDP() - approximates a contour shape
-Typical pipeline:
-  1. Preprocessing (e.g., grayscale, thresholding)
-  2. Contour detection
-  3. Contour analysis (e.g., bounding shapes, features)
-  4. Post-processing (e.g., drawing, visualization)
+Main functions:
+ - `cv2.findContours(bin, mode, method)` — detect contours
+ - `cv2.drawContours(img, contours, idx, color, thickness)` — draw
+ - `cv2.boundingRect(c)` / `cv2.minAreaRect(c)` — bounding boxes
+ - `cv2.minEnclosingCircle(c)` — enclosing circle
+ - `cv2.moments(c)` — area/centroid/orientation
+ - `cv2.approxPolyDP(c, eps, closed)` — polygonal approx
+
+Key ideas:
+ - Contours operate on binary images; preprocessing matters.
+ - Choose retrieval (EXTERNAL vs. TREE) and approximation (SIMPLE vs. NONE).
+ - Features (area, perimeter, centroid) aid shape analysis.
+
+Tips:
+ - Clean masks first (open/close) for better contours.
+ - Guard against empty `contours` before `max()`.
+ - Normalize epsilon by perimeter (e.g., 1–5%).
 '''
