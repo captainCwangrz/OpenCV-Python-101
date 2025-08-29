@@ -9,8 +9,16 @@ Saturation = how 'pure' the color is (0 = grayish, 255 = fully colored)
 Value = brightness (0 = dark, 255 = bright)
 '''
 
+"""
+Unit 6: HSV & Color Tracking
+- Overview: Create an HSV mask for a color range; then track color in live video.
+- Inputs: `tree_img.jpg` for static demo; webcam for live tracking.
+- Usage: Move mouse over the window to print HSV at cursor; press 'q' to quit.
+"""
+
 import cv2
 
+# --- Static HSV Mask ---
 # Convert BGR to HSV
 img = cv2.imread('tree_img.jpg')
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -40,7 +48,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 
-# Apply color tracking to video
+# --- Live Color Tracking ---
 cap = cv2.VideoCapture(0)
 cv2.namedWindow('Frame')
 cv2.setMouseCallback('Frame', show_hsv) # Register mouse event handler once
@@ -74,13 +82,19 @@ cv2.destroyAllWindows()
 
 '''
 Unit 6 Summary
-Main Concepts:
-- HSV
-- Color detection and tracking
-- Bitwise operations
-- Mouse events
+Main functions:
+ - `cv2.cvtColor(img, cv2.COLOR_BGR2HSV)` — BGR→HSV
+ - `cv2.inRange(hsv, lower, upper)` — binary mask for color range
+ - `cv2.bitwise_and(img, img, mask)` — keep only masked regions
+ - `cv2.setMouseCallback(win, func)` — inspect pixel HSV interactively
 
-For tracking:
- - Avoid the trap of aiming for a perfect mask
- - User morpholoty, countour tracking, Kalman filters, etc. to improve results
+Key ideas:
+ - OpenCV Hue range is [0, 179]; red often needs two hue bands.
+ - HSV isolates color (Hue) from illumination (Value), easing thresholding.
+ - Masks are binary (0/255) and combine well with bitwise ops.
+
+Tips:
+ - Don’t chase a perfect mask; postprocess with morphology/contours/filters.
+ - Tune S/V thresholds to reject gray/dark backgrounds.
+ - Sample HSV dynamically under your lighting rather than hard‑coding.
 '''
