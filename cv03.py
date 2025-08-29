@@ -1,6 +1,15 @@
+"""
+Unit 3: Webcam Preview & FPS
+- Overview: Open webcam, show live frames, and overlay FPS (running average).
+- Inputs: Default camera index 0.
+- Usage: Press 'q' in the preview window to exit.
+"""
+
 import cv2, time, collections
 
-cap = cv2.VideoCapture(0) # 0 is usually the built-in webcam, something like video.mp4 also works
+# --- Camera setup ---
+# Index 0 selects the default camera. A filename like 'video.mp4' also works.
+cap = cv2.VideoCapture(0)
 
 '''
 These settings may or may not work depending on your camera and OpenCV backend
@@ -14,6 +23,7 @@ fps_reported = cap.get(cv2.CAP_PROP_FPS)
 print(f"Camera reports: {w}x{h} @ {fps_reported} FPS (may be unreliable)")
 '''
 
+# --- FPS running average over last 30 frames ---
 times = collections.deque(maxlen=30)
 start = time.time()
 while True:
@@ -22,31 +32,39 @@ while True:
     print("Failed to grab frame")
     break
   
-  # Calculate and display FPS using running average over last 30 frames
-  # Seems like webcam fps is usually around 30 @ 1080p
-  # Exposure, camera cap, backend, usb bandwidth, driver all affect fps
+  # Calculate FPS using running average over last 30 frames
+  # Notes: typical webcams run ~30 FPS @ 1080p; exposure, camera caps,
+  # backend, USB bandwidth, and drivers all affect measured FPS.
   now = time.time()
   times.append(now - start)
   start = now
   fps = 1 / (sum(times) / len(times))
+  # Overlay FPS text: (org), font, scale, color (BGR), thickness
   cv2.putText(frame, f'FPS: {fps:.1f}', (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
 
   cv2.imshow("Webcam", frame)
 
-  if cv2.waitKey(1) & 0xFF == ord('q'): # press 'q' to quit, 1 ms delay is minimum for imshow to work
+  # Wait ~1 ms to process GUI events; quit on 'q'
+  if cv2.waitKey(1) & 0xFF == ord('q'):
     break
 cap.release()
 cv2.destroyAllWindows()
 
 '''
 Unit 3 Summary
-cv2.VideoCapture(0) to capture from webcam
-cap.read() to read frames in a loop
-cap.release() to release the camera
+Main functions:
+ - `cv2.VideoCapture(0)` — open default camera
+ - `cap.read()` — grab frames in a loop
+ - `cv2.putText()` — annotate frames
+ - `cv2.imshow()` / `cv2.waitKey()` — display and handle UI
+ - `cap.release()` / `cv2.destroyAllWindows()` — cleanup
 
-For serious applications:
- - Must know your camera's supported resolutions, fps, exposure, etc.
- - Settings matter a lot
- - Use v4l2-ctl on Linux to get/set camera settings?
- - Consider threading for performance (depends on application real time vs motion analysis)
+Key ideas:
+ - FPS via running average of frame intervals for stability.
+ - Camera-reported properties (fps, width/height) can be unreliable.
+
+Tips:
+ - Tune exposure/auto-exposure; it impacts FPS and motion blur.
+ - On Linux, `v4l2-ctl` helps list/set camera capabilities.
+ - Consider threading or async capture for CPU-bound pipelines.
 '''
