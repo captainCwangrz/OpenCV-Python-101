@@ -9,7 +9,7 @@ blur = cv2.blur(noisy_img, (5, 5)) # kernel size 5x5
 cv2.imshow('Noisy Image', noisy_img)
 cv2.imshow('Average Blur', blur)
 
-# Gussian blur
+# Gaussian blur
 # Similar to average blur, but uses a Gaussian kernel which gives more weight to the central pixels
 gaussian = cv2.GaussianBlur(noisy_img, (5, 5), 0) # kernel size 5x5, sigmaX=0. 0 means auto-calculate based on kernel size
 cv2.imshow('Gaussian Blur', gaussian)
@@ -64,9 +64,9 @@ Erosion:
 Dilate:
   Vice versa
 Opening:
-  erosion -> dilation
+  erosion then dilation
 Closing:
-  dilation -> erosion
+  dilation then erosion
 '''
 kernel = np.ones((5,5), np.uint8) # k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3)) to get various non rectangular shapes
 # Erosion: shrink white regions
