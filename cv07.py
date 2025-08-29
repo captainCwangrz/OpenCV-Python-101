@@ -1,14 +1,3 @@
-'''
-HSV Color Space
-========================================
-Hue = the base color (0-179 in OpenCV)
-  Red ~= 0-10 or 170-180
-  Green ~= 35-85
-  Blue ~= 100-130
-Saturation = how 'pure' the color is (0 = grayish, 255 = fully colored)
-Value = brightness (0 = dark, 255 = bright)
-'''
-
 """
 Unit 6: HSV & Color Tracking
 - Overview: Create an HSV mask for a color range; then track color in live video.
@@ -17,6 +6,14 @@ Unit 6: HSV & Color Tracking
 """
 
 import cv2
+
+# --- HSV color space (notes) ---
+# Hue in OpenCV is [0, 179].
+#   Red ~ 0-10 and 170-179
+#   Green ~ 35-85
+#   Blue ~ 100-130
+# Saturation: 0 grayish, 255 fully saturated
+# Value: 0 dark, 255 bright
 
 # --- Static HSV Mask ---
 # Convert BGR to HSV
