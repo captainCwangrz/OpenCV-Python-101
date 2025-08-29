@@ -79,7 +79,7 @@ Closing:
   dilation -> erosion (fills small black holes)
 '''
 kernel = np.ones((5, 5), np.uint8)
-## Tip: try non-rect kernels
+# Tip: try non-rect kernels
 # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
 
 # Erosion: shrink white regions
@@ -104,25 +104,26 @@ cv2.destroyAllWindows()
 '''
 Unit 4 Summary
 Main functions:
- - `cv2.blur(img, ksize)` — average smoothing
- - `cv2.GaussianBlur(img, ksize, sigmaX)` — Gaussian smoothing
- - `cv2.medianBlur(img, ksize)` — median smoothing (salt‑and‑pepper)
- - `cv2.Canny(gray, low, high)` — edge detection (hysteresis)
- - `cv2.threshold(gray, T, max, type)` — global thresholding
- - `cv2.adaptiveThreshold(gray, max, method, type, block, C)` — local thresholding
- - `cv2.erode(img, kernel, iters)` — shrink white regions
- - `cv2.dilate(img, kernel, iters)` — expand white regions
- - `cv2.morphologyEx(img, op, kernel)` — opening/closing and more
+ - `cv2.blur()` - average blurring
+ - `cv2.GaussianBlur()` - Gaussian blurring
+ - `cv2.medianBlur()` - median blurring
+ - `cv2.Canny()` - edge detection
+ - `cv2.threshold()` - simple thresholding
+ - `cv2.adaptiveThreshold()` - adaptive thresholding
+ - `cv2.erode()` - erosion
+ - `cv2.dilate()` - dilation
+ - `cv2.morphologyEx()` - opening/closing
 
-Key tunables:
- - Blur `ksize`: odd sizes (3,5,7); larger smooths more but blurs edges.
+Key ideas:
+ - Blur ksize: odd sizes (3,5,7); larger smooths more but blurs edges.
  - Canny thresholds: scale with contrast; blur first to reduce noise.
- - Thresholding: global `T` vs. adaptive `block/C` for uneven lighting.
+ - Thresholding: global T vs. adaptive block/C for uneven lighting.
  - Morphology: kernel shape/size and iteration count tailor cleanup.
 
 Tips:
  - Convert to grayscale before Canny/thresholding.
  - Use adaptive thresholding under varying illumination.
  - Prefer binary images (foreground=white) for morphology semantics.
- - Try `cv2.getStructuringElement` for ellipse/cross kernels when shapes matter.
+ - Try cv2.getStructuringElement for ellipse/cross kernels when shapes matter.
 '''
+
