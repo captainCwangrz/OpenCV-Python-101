@@ -1,16 +1,23 @@
+"""
+Unit 2: Drawing & Basic Ops
+- Overview: Draw primitives and text, crop, resize, flip, rotate, and reuse ROIs.
+- Inputs: `gray_img.png` (from Unit 1) in the same folder.
+- Usage: Press any key in image windows to proceed/close.
+"""
+
 import cv2
 
 gray_img = cv2.imread('gray_img.png')
 
-#Drawing on images
-drawn_image = gray_img.copy() #deep copy
-#line: img, start, end, color, thickness (color 0 cuz of greyscale)
+# --- Drawing on images ---
+drawn_image = gray_img.copy() # deep copy
+# Line: img, start, end, color, thickness (0 because grayscale)
 cv2.line(drawn_image, (0, drawn_image.shape[0]//2), (drawn_image.shape[1], drawn_image.shape[0]//2), 0, 5) 
-#rectangle: img, top-left, bottom-right, color, thickness
+# Rectangle: img, top-left, bottom-right, color, thickness
 cv2.rectangle(drawn_image, (drawn_image.shape[1]//4, drawn_image.shape[0]//4), (drawn_image.shape[1]*3//4, drawn_image.shape[0]*3//4), 0, 5)
-#circle: img, center, radius, color, thickness
+# Circle: img, center, radius, color, thickness
 cv2.circle(drawn_image, (drawn_image.shape[1]//2, drawn_image.shape[0]//2), drawn_image.shape[0]//8, 0, -1) #-1 thickness fills the circle
-#text: img, text, bottom-left, font, font-scale, color, thickness
+# Text: img, text, bottom-left, font, font-scale, color, thickness
 cv2.putText(drawn_image, 'Hello OpenCV', (drawn_image.shape[1]//4, drawn_image.shape[0]//8), cv2.FONT_HERSHEY_SIMPLEX, 2, 0, 3)
 cv2.imshow("drawings", drawn_image)
 cv2.imwrite('drawn_image.png', drawn_image)
@@ -18,7 +25,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 print()
 
-#Cropping images
+# --- Cropping images ---
 cropped_img = gray_img.copy()
 cropped_img = cropped_img[0:cropped_img.shape[0]//2,0:] #rows, cols
 print(f'cropped_img shape: {cropped_img.shape}')
@@ -27,7 +34,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 print()
 
-#Resizing images
+# --- Resizing images ---
 resized_img = gray_img.copy()
 # resize(img, (width, height), interpolation=), default is INTER_AREA for shrinking and INTER_LINEAR for enlarging
 # enlarging methods: INTER_CUBIC (better but slower), INTER_LINEAR (faster)
@@ -39,7 +46,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 print()
 
-#Flipping images
+# --- Flipping images ---
 flipped_img = gray_img.copy()
 flipped_h = cv2.flip(flipped_img, 1) #1: horizontal, -1: both
 flipped_v = cv2.flip(flipped_img, 0) #0: vertical
@@ -55,7 +62,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 print()
 
-#Rotating images
+# --- Rotating images ---
 rotated_img = gray_img.copy()
 rotated_img = cv2.rotate(rotated_img, cv2.ROTATE_90_CLOCKWISE) #ROTATE_90_COUNTERCLOCKWISE, ROTATE_180
 cv2.imshow("rotated_img", rotated_img)
@@ -63,7 +70,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 print()
 
-#ROI
+# --- ROI (reuse) ---
 roi_repeated = gray_img.copy()
 cv2.circle(roi_repeated, (30, 30), 30, 255, 1)
 roi = roi_repeated[0:60, 0:60]
@@ -78,21 +85,23 @@ print()
 
 '''
 Unit 2 Summary
-Drawing:
-  - cv2.line(img, start coord, end coord, color, thickness)
-  - cv2.rectangle(img, top-left coord, bottom-right coord, color, thickness))
-  - cv2.circle(img, center coord, radius, color, thichkness)
-  - cv2.putText(img, text, bottom-left coord, font, font-scale, color, thickness)
-Cropping:
-  - img[row_start:row_end, col_start:col_end ]
-Resizing:
-  - cv2.resize(img, (new_width, new_height), interpolation)
-Flipping:
-  - cv2.flip(img, code) # code: 0 vertical, 1 horizontal, -1 both
-Rotating:
-  - cv2.rotate(img, code) # code: ROTATE_90_CLOCKWISE, ROTATE_90_COUNTERCLOCKWISE, ROTATE_180
-ROI:
-  - roi = img[y1:y2, x1:x2]
-  - img[y:y+h, x:x+w] = roi
+Main functions:
+ - `cv2.line(img, pt1, pt2, color, thickness)` — draw line
+ - `cv2.rectangle(img, pt1, pt2, color, thickness)` — draw rectangle
+ - `cv2.circle(img, center, radius, color, thickness)` — draw circle
+ - `cv2.putText(img, text, org, font, scale, color, thickness)` — text
+ - `cv2.resize(img, (w, h), interpolation)` — resize
+ - `cv2.flip(img, code)` — flip (0=vertical, 1=horizontal, −1=both)
+ - `cv2.rotate(img, code)` — rotate (e.g., ROTATE_90_CLOCKWISE)
+
+Key ideas:
+ - Coordinate order is (x, y) for drawing points; array indexing is [y, x].
+ - Grayscale images use a single channel; color is BGR.
+ - ROI slicing creates a view; assign back to copy regions efficiently.
+
+Tips:
+ - Use integer coordinates and odd thicknesses for crisp lines.
+ - Choose interpolation: INTER_AREA (shrink), INTER_LINEAR (fast), INTER_CUBIC (quality).
+ - Keep UI snappy by closing windows (`waitKey` + `destroyAllWindows`).
 '''
 
