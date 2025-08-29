@@ -10,7 +10,7 @@ out = cv2.VideoWriter('private_output.mp4', fourcc, fps, (w, h), isColor=False)
 while True:
   ret, frame = cap.read()
   if not ret:
-    print("Fialed to grab frame")
+    print("Failed to grab frame")
     break
   frame = cv2.flip(frame, 1)
   frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -36,5 +36,4 @@ fps parameter dictates video playback speed
   - if fps is too high, video plays too fast
   - if fps is too low, video plays too slow
 So knowing the actual fps of your input is important
-But specifics are beyong the scope of this
 '''
