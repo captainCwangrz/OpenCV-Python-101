@@ -1,5 +1,5 @@
 """
-Unit 3 (cont.): Record Grayscale Video
+Unit 3: Record Grayscale Video
 - Overview: Capture webcam, flip horizontally, convert to grayscale, and write MP4.
 - Inputs: Default camera index 0.
 - Usage: Press 'q' in the preview window to stop recording.
@@ -35,20 +35,20 @@ cv2.destroyAllWindows()
 '''
 Unit 3 Summary
 Main functions:
- - `cv2.VideoWriter_fourcc(*'mp4v')` — MP4 codec
- - `cv2.VideoWriter(path, fourcc, fps, (w, h), isColor)` — writer
- - `out.write(frame)` — append a frame
- - `cv2.flip(img, 1)` — horizontal flip
- - `cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)` — grayscale conversion
- - `out.release()` / `cv2.destroyAllWindows()` — cleanup
+ - `cv2.VideoWriter_fourcc(*'mp4v')` - MP4 codec
+ - `cv2.VideoWriter(path, fourcc, fps, (w, h), isColor)` - writer
+ - `out.write(frame)` - append a frame
+ - `cv2.flip(img, 1)` - horizontal flip
+ - `cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)` - grayscale conversion
+ - `out.release()` / `cv2.destroyAllWindows()` - cleanup
 
 Key ideas:
  - FPS drives playback speed; an incorrect FPS makes video too fast/slow.
- - Frame size must match the writer’s (w, h) exactly.
- - `isColor=False` expects single‑channel frames (e.g., grayscale).
+ - Frame size must match the writer's (w, h) exactly.
+ - `isColor=False` expects single-channel frames (e.g., grayscale).
 
 Tips:
  - If `cap.get(FPS)` returns 0, choose a sane default (e.g., 30).
  - Verify writer opened via `out.isOpened()` to catch codec issues.
- - Prefer platform‑supported codecs/containers for easy playback.
+ - Prefer platform-supported codecs/containers for easy playback.
 '''
