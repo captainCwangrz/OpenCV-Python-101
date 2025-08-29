@@ -1,3 +1,10 @@
+"""
+Unit 5: Geometric Transforms
+- Overview: Apply translation, rotation, affine, and perspective transforms with short math notes.
+- Inputs: `test_img.png` in the same folder.
+- Usage: Press any key in image windows to proceed/close.
+"""
+
 import cv2
 import numpy as np
 
@@ -90,19 +97,19 @@ cv2.destroyAllWindows()
 '''
 Unit 5 Summary 
 Main functions:
- - cv2.warpAffine() - for translation, rotation, affine transformation
- - cv2.warpPerspective() - for perspective transformation
- - cv2.getRotationMatrix2D() - to get rotation matrix
- - cv2.getAffineTransform() - to get affine transformation matrix
- - cv2.getPerspectiveTransform() - to get perspective transformation matrix
-Main concepts:
-  - Translation - shifting image in x and y direction
-  - Rotation - rotating image around a point
-  - Affine Transformation - combination of translation, rotation, scaling, shearing
-  - Perspective Transformation - changing the perspective of the image
-Linear Algebra Refresher:
-  - Matrix Multiplication
-  - Homogeneous Coordinates
-  - Transformation Matrices
-  - Combining Transformations
+ - `cv2.warpAffine(img, M, (w, h))` — translation/rotation/affine
+ - `cv2.warpPerspective(img, M, (w, h))` — perspective warp
+ - `cv2.getRotationMatrix2D(center, angle, scale)` — rotation matrix
+ - `cv2.getAffineTransform(pts1, pts2)` — 2×3 affine matrix
+ - `cv2.getPerspectiveTransform(pts1, pts2)` — 3×3 homography
+
+Key ideas:
+ - Affine preserves parallel lines; perspective can map quadrilaterals.
+ - 2×3 affine matrices model rotation, scale, shear + translation.
+ - Homographies (3×3) work in homogeneous coordinates; enable “unskewing”.
+
+Tips:
+ - Use float32 matrices; point sets must be non‑collinear.
+ - Choose output size carefully to avoid cropping after transforms.
+ - Compose transforms by multiplying matrices before warping.
 '''
