@@ -66,7 +66,7 @@ y' = bx + dy + ty
 cv2 just needs 3 pairs of corresponding points to determine the 6 unknowns. (3 pairs must not be collinear)
 '''
 pts1 = np.float32([[50, 50], [200, 50], [50, 200]]) # original 'triangle'
-pts2 = np.float32([[10, 100], [200, 50], [100, 250]]) # wrapped 'triangle'
+pts2 = np.float32([[10, 100], [200, 50], [100, 250]]) # warped 'triangle'
 M = cv2.getAffineTransform(pts1, pts2)
 affine = cv2.warpAffine(img, M, (w, h))
 cv2.imshow('Affine Transform', affine)
@@ -89,7 +89,7 @@ cv2.destroyAllWindows()
 
 '''
 Unit 5 Summary 
-Main functionns:
+Main functions:
  - cv2.warpAffine() - for translation, rotation, affine transformation
  - cv2.warpPerspective() - for perspective transformation
  - cv2.getRotationMatrix2D() - to get rotation matrix
