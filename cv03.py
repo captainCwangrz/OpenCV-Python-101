@@ -53,11 +53,11 @@ cv2.destroyAllWindows()
 '''
 Unit 3 Summary
 Main functions:
- - `cv2.VideoCapture(0)` — open default camera
- - `cap.read()` — grab frames in a loop
- - `cv2.putText()` — annotate frames
- - `cv2.imshow()` / `cv2.waitKey()` — display and handle UI
- - `cap.release()` / `cv2.destroyAllWindows()` — cleanup
+ - `cv2.VideoCapture(0)` - open default camera
+ - `cap.read()` - grab frames in a loop
+ - `cv2.putText()` - annotate frames
+ - `cv2.imshow()` / `cv2.waitKey()` - display and handle UI
+ - `cap.release()` / `cv2.destroyAllWindows()` - cleanup
 
 Key ideas:
  - FPS via running average of frame intervals for stability.
