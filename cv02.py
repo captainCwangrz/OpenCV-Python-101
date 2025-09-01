@@ -48,7 +48,7 @@ print()
 
 # --- Flipping images ---
 flipped_img = gray_img.copy()
-flipped_h = cv2.flip(flipped_img, 1) #1: horizontal, -1: both
+flipped_h = cv2.flip(flipped_img, 1) #1: horizontal
 flipped_v = cv2.flip(flipped_img, 0) #0: vertical
 flipped_hv = cv2.flip(flipped_img, -1) #-1: both
 cv2.imshow("flipped_h", flipped_h)
